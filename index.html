@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nuestros momentos más felices juntos">
+    <title>Nuestros Momentos ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin:  30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 1s ease;
+        }
+
+        . photo-gallery {
+            display:  grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow:  0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.2s; }
+        .photo-card:nth-child(2) { animation-delay: 0.4s; }
+        .photo-card:nth-child(3) { animation-delay: 0.6s; }
+        .photo-card:nth-child(4) { animation-delay: 0.8s; }
+        . photo-card:nth-child(5) { animation-delay: 1s; }
+        .photo-card:nth-child(6) { animation-delay: 1.2s; }
+        . photo-card:nth-child(7) { animation-delay: 1.4s; }
+        .photo-card:nth-child(8) { animation-delay: 1.6s; }
+
+        .photo-card: hover {
+            transform: translateY(-10px);
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            height:  320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #f5f5f5;
+            margin-bottom: 15px;
+        }
+
+        . photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 10px;
+        }
+
+        .photo-card: nth-child(1) img {
+            object-fit: cover;
+            object-position: center 30%;
+            transform: scale(0.85);
+        }
+
+        .photo-card:nth-child(5) img {
+            object-fit: cover;
+            object-position: center 35%;
+            transform: scale(0.85);
+        }
+
+        .photo-card:nth-child(6) img {
+            object-fit: cover;
+            object-position: center center;
+            transform: scale(0.85);
+        }
+
+        .photo-card:nth-child(7) img {
+            object-fit: cover;
+            object-position: center 30%;
+            transform: scale(0.85);
+        }
+
+        .photo-card:nth-child(8) img {
+            object-fit: cover;
+            object-position: center 35%;
+            transform: scale(0.85);
+        }
+
+        .photo-card p {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .photo-card strong {
+            color: #ff6b9d;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .final-message {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeInUp 1s ease 2s forwards;
+        }
+
+        .final-message h2 {
+            color: #ff6b9d;
+            font-size: 2.2rem;
+            margin-bottom:  20px;
+        }
+
+        .final-message p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height:  1.8;
+        }
+
+        .petal {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform:  translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity:  0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity:  1;
+                transform: translateY(0);
+            }
+        }
+
+        .audio-control {
+            position:  fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            cursor: pointer;
+            font-size: 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: 4px solid white;
+            animation: pulse 2s ease infinite;
+        }
+
+        . audio-control:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.7);
+        }
+
+        .audio-control:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            }
+            50% {
+                box-shadow:  0 8px 35px rgba(102, 126, 234, 0.8);
+            }
+        }
+
+        .music-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            border-radius:  50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 0.95rem;
+            color: #667eea;
+            font-weight: bold;
+            z-index: 999;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .photo-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .photo-wrapper {
+                height: 280px;
+            }
+            .photo-card:nth-child(1) img,
+            .photo-card:nth-child(5) img,
+            .photo-card:nth-child(6) img,
+            .photo-card:nth-child(7) img,
+            .photo-card:nth-child(8) img {
+                transform: scale(0.9);
+            }
+            .final-message {
+                padding: 30px 20px;
+            }
+            .final-message h2 {
+                font-size: 1.8rem;
+            }
+            .audio-control {
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-indicator" id="musicIndicator">
+        🎵 Reproduciendo:  Te Quiero - Hombres G
+    </div>
+
+    <div class="container">
+        <h1>💕 Nuestros Momentos Más Felices 💕</h1>
+        
+        <div class="photo-gallery">
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/5X84wQP.jpg" alt="Momento 1" loading="lazy">
+                </div>
+                <p>
+                    <strong>El inicio de algo hermoso</strong>
+                    Cada momento contigo es un regalo que atesoro en mi corazón
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/xmh4Zbb.jpg" alt="Momento 2" loading="lazy">
+                </div>
+                <p>
+                    <strong>Tu sonrisa ilumina mis días</strong>
+                    Verte feliz es lo que más me importa en este mundo
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/6l1tmIV.jpg" alt="Momento 3" loading="lazy">
+                </div>
+                <p>
+                    <strong>Contigo todo es mejor</strong>
+                    Eres la razón por la que creo en el amor verdadero
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/uZgbvIg.jpg" alt="Momento 4" loading="lazy">
+                </div>
+                <p>
+                    <strong>Nuestros momentos íntimos</strong>
+                    Donde el tiempo se detiene y solo existimos tú y yo
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/Rw1ylaT.jpg" alt="Momento 5" loading="lazy">
+                </div>
+                <p>
+                    <strong>La felicidad en tus ojos</strong>
+                    Ver tu mirada me recuerda por qué te amo tanto
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/Y9LZ2Ka.jpg" alt="Momento 6" loading="lazy">
+                </div>
+                <p>
+                    <strong>Cada instante a tu lado</strong>
+                    Construyendo recuerdos que guardaré por siempre
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/a4GMX7A.jpg" alt="Momento 7" loading="lazy">
+                </div>
+                <p>
+                    <strong>Mi persona favorita</strong>
+                    Gracias por ser paciente, comprensiva y amarme como lo haces
+                </p>
+            </div>
+
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="https://i.imgur.com/b73dLJg.jpg" alt="Momento 8" loading="lazy">
+                </div>
+                <p>
+                    <strong>Este momento especial</strong>
+                    Donde te demuestro que eres mi todo y prometo ser mejor cada día
+                </p>
+            </div>
+        </div>
+
+        <div class="final-message">
+            <h2>🌟 Eres Mi Todo 🌟</h2>
+            <p>
+                Cada fotografía cuenta una historia, cada historia habla de amor. <br>
+                Perdóname por los momentos en que no supe controlarme.<br>
+                Gracias por tu paciencia, por entenderme y por amarme. <br>
+                Prometo trabajar cada día en ser la mejor versión de mí para ti. <br><br>
+                <strong style="color: #ff6b9d; font-size: 1.6rem;">
+                    Te amo con todo mi corazón ❤️
+                </strong><br><br>
+                <span style="font-size: 1.1rem; color: #777;">
+                    Y siempre lo haré... 
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div class="audio-control" onclick="toggleMusic()" id="musicBtn" title="Clic para música">
+        🎵
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://archive.org/download/hombres-g-te-quiero-audio-oficial/Hombres%20G%20-%20Te%20quiero%20%28Audio%20Oficial%29.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+        const indicator = document.getElementById('musicIndicator');
+        let musicPlaying = false;
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                music. pause();
+                btn.textContent = '🎵';
+                indicator.style.display = 'none';
+                musicPlaying = false;
+            } else {
+                music.play().then(() => {
+                    btn. textContent = '⏸️';
+                    indicator.style. display = 'block';
+                    musicPlaying = true;
+                }).catch(() => {
+                    alert('🎵 Haz clic en el botón de música para reproducir');
+                });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                music.play().then(() => {
+                    btn. textContent = '⏸️';
+                    indicator.style. display = 'block';
+                    musicPlaying = true;
+                }).catch(() => {
+                    console.log('Haz clic para reproducir música');
+                });
+            }, 1500);
+        });
+
+        function createPetals() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.left = Math. random() * 100 + '%';
+                    petal. style.animationDuration = (Math.random() * 3 + 5) + 's';
+                    petal.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(petal);
+                    setTimeout(() => petal.remove(), 8000);
+                }, i * 200);
+            }
+        }
+
+        createPetals();
+        setInterval(createPetals, 8000);
+
+        document.addEventListener('click', function initAudio() {
+            if (! musicPlaying) {
+                music.play().then(() => {
+                    btn.textContent = '⏸️';
+                    indicator.style.display = 'block';
+                    musicPlaying = true;
+                }).catch(() => {});
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>
